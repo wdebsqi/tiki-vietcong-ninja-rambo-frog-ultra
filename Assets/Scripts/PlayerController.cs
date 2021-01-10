@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        Debug.Log(CurrentJumpsCount);
+        //Debug.Log(CurrentJumpsCount);
         if (isGrounded)
         {
             rigidbody2.velocity = new Vector2(rigidbody2.velocity.x, BasicJumpPower);
@@ -116,4 +116,5 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.gray;
         Gizmos.DrawCube(PlayerLegPosition.position, BoxSize);
     }
+    
 }
