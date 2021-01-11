@@ -145,9 +145,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e6de76ac2858c49b10b652cae8ef76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movesRight: 0
   movementSpeed: 2
+  healt: 3
   rigidbodyEnemy: {fileID: 8112696569555277493}
   animator: {fileID: 0}
+  enemy: {fileID: 8112696569555277494}
+  deathEffect: {fileID: 3219065541448567700, guid: 89282e21227354c48aca8df6c2b3955a,
+    type: 3}
 --- !u!95 &8965995007631461346
 Animator:
   serializedVersion: 3
