@@ -8,10 +8,11 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rigidbody2;
     public LayerMask GroundLayer;
     public Transform PlayerLegPosition;
-    public Animator animator; 
+    public Animator animator;
     #endregion
 
     #region Booleans variables
+    bool movesRight = true;
     bool isGrounded;
     #endregion
 
@@ -47,7 +48,6 @@ public class PlayerController : MonoBehaviour
         // Moving  ---- if statement
         if (HorizontalMovement != 0)
         {
-            
             Flip();
             animator.SetBool("isRunning", true); // Setting true value of bool - isRunning
         }
@@ -57,10 +57,9 @@ public class PlayerController : MonoBehaviour
         }
 
         // Jumping ---- if statement
-        if (((Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.Space)) || (Input.GetKeyDown(KeyCode.W))))
+        if (((Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.W))))
         {
             Jump();
-            
         }
 
     }
@@ -83,7 +82,6 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        //Debug.Log(CurrentJumpsCount);
         if (isGrounded)
         {
             rigidbody2.velocity = new Vector2(rigidbody2.velocity.x, BasicJumpPower);
@@ -101,13 +99,29 @@ public class PlayerController : MonoBehaviour
 
     void Flip()
     {
+        // if moves right
         if(HorizontalMovement == 1)
         {
-            transform.localScale = new Vector2(1, 1);
+            // check if was not moving right
+            if (!movesRight)
+            {
+                // if so, rotate, because direction was changed
+                transform.Rotate(0, 180f, 0);
+            }
+            // check that now is moving right
+            movesRight = true;
         }
+        // if moves left
         else if(HorizontalMovement == -1)
         {
-            transform.localScale = new Vector2(-1, 1);
+            // check if was moving right
+            if (movesRight)
+            {
+                // if so, rotate, because direction was changed
+                transform.Rotate(0, 180f, 0);
+            }
+            // check that now is not moving right
+            movesRight = false;
         }
     }
 
