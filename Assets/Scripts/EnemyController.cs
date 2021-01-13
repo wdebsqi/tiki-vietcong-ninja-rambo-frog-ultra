@@ -63,7 +63,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (movesRight)
+
+            if (movesRight)
         {
             // check if not hitting right wall
             if (transform.position.x >= rightWall.position.x)
@@ -113,16 +114,28 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage (int damage)
     {
         Debug.Log("Took damage");
+        animator.SetBool("isDamaged", true);
+        StartCoroutine(waitForAnimation());
         health -= damage;
         if (health <= 0)
         {
             Die();
         }
+        //animator.SetBool("isDamaged", false);
     }
 
     void Die()
     {
-        Debug.Log("Enemy died");
-        Destroy(gameObject);
+        movementSpeed = 0;
+        rigidbodyEnemy.velocity = new Vector2(0, rigidbodyEnemy.velocity.y);
+        animator.SetTrigger("Dead");
+        Destroy(gameObject, 0.5f);
+    }
+
+    IEnumerator waitForAnimation()
+    {
+        yield return new WaitForSeconds(0.350f);
+        animator.SetBool("isDamaged", false);
+
     }
 }
