@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     #endregion
 
-    #region Booleans variables
+    #region Boolean variables
     bool movesRight = true;
     bool isGrounded;
     #endregion
@@ -67,9 +67,10 @@ public class PlayerController : MonoBehaviour
     // Update is called fixed amount of times (depending on framerate)
     private void FixedUpdate()
     {
-        // Checking if Raycast detected colider that is ground
+        // Checking if box detected colider that is ground
         isGrounded = Physics2D.BoxCast(PlayerLegPosition.position, BoxSize, 0f, Vector2.down, 0, GroundLayer);
 
+        // Jumping -- when jumping isGrounded value is false
         animator.SetBool("isJumping", !isGrounded);
 
         rigidbody2.velocity = new Vector2((MovementSpeed) * HorizontalMovement, rigidbody2.velocity.y);
