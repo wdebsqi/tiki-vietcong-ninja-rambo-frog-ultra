@@ -53,9 +53,10 @@ public class EnemyController : MonoBehaviour
             transform.localScale = new Vector2(-1, 1);
         }
 
-        // destroys enemies that got into the pit
+        // destroys enemies that fall into the pit
         if (transform.position.y <= -7.4)
         {
+            Score.scoreValue -= 1;
             Die();
         }
     }
@@ -110,16 +111,19 @@ public class EnemyController : MonoBehaviour
     }
 
     
+    // damages an enemy and checks whether to kill them
     public void TakeDamage (int damage)
     {
         Debug.Log("Took damage");
         health -= damage;
         if (health <= 0)
         {
+            Score.scoreValue += 1;
             Die();
         }
     }
 
+    // kills an enemy
     void Die()
     {
         Debug.Log("Enemy died");
