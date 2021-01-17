@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
         // check if hit an enemy
         if (enemy != null)
         {
-            Debug.Log("Enemy hit!");
+            //Debug.Log("Enemy hit!");
             enemy.TakeDamage(damage);
         }
         // destroy bullet

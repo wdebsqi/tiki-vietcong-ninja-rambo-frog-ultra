@@ -33,12 +33,12 @@ public class EnemyController : MonoBehaviour
         if (leftOrRight == 0)
         {
             movesRight = false;
-            Debug.Log("Spawning LEFT moving enemy");
+            //Debug.Log("Spawning LEFT moving enemy");
         }
         else
         {
             movesRight = true;
-            Debug.Log("Spawning RIGHT moving enemy");
+            //Debug.Log("Spawning RIGHT moving enemy");
         }
     }
 
@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
             if (transform.position.x >= rightWall.position.x)
             {
                 // if true, go left
-                Debug.Log("Hitting RIGHT, going LEFT!");
+                //Debug.Log("Hitting RIGHT, going LEFT!");
                 moveLeft();
             }
             // if not, continue going right
@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour
             if (transform.position.x <= leftWall.position.x)
             {
                 // if true, go right
-                Debug.Log("Hitting LEFT, going RIGHT!");
+                //Debug.Log("Hitting LEFT, going RIGHT!");
                 moveRight();
             }
             // if not, continue going left
@@ -114,7 +114,7 @@ public class EnemyController : MonoBehaviour
     // damages an enemy and checks whether to kill them
     public void TakeDamage (int damage)
     {
-        Debug.Log("Took damage");
+        //Debug.Log("Took damage");
         health -= damage;
         if (health <= 0)
         {
@@ -126,7 +126,7 @@ public class EnemyController : MonoBehaviour
     // kills an enemy
     void Die()
     {
-        Debug.Log("Enemy died");
+        //Debug.Log("Enemy died");
         Destroy(gameObject);
     }
 }
