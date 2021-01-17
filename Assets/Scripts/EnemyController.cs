@@ -6,12 +6,18 @@ public class EnemyController : MonoBehaviour
 {
     #region References
     public Rigidbody2D rigidbodyEnemy;
-    public Animator animator;
-
     public GameObject enemy;
 
+    [Header("Animator")]
+    public Animator animator;
+
+    [Header("Particles")]
+    public GameObject deathParticles;
+
+    [Header("Layers")]
     public LayerMask GroundLayer;
 
+    [Header("Physics")]
     public Transform EnemyLegPosition;
 
     Transform leftWall, rightWall;
@@ -21,6 +27,7 @@ public class EnemyController : MonoBehaviour
     public bool movesRight;
     bool isGrounded;
     bool isFalling = true;
+    bool isDead = false;
     #endregion
 
     #region Movement settings
@@ -83,8 +90,10 @@ public class EnemyController : MonoBehaviour
         }
 
         // Death -- destroys enemies that got into the pit
-        if (transform.position.y <= -7.4)
+
+        if ((transform.position.y <= -7.4) && (!isDead))
         {
+            isDead = true;
             Die();
         }
     }
@@ -207,6 +216,7 @@ public class EnemyController : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            isDead = true;
             Die();
         }
     }
@@ -214,12 +224,13 @@ public class EnemyController : MonoBehaviour
 
     // Function - Health -  stopping enemy movement and destroying object
     #region Die()
-    void Die()
+    public void Die()
     {
         movementSpeed = 0;
         rigidbodyEnemy.velocity = new Vector2(0, rigidbodyEnemy.velocity.y);
         animator.SetTrigger("Dead");
-        Destroy(gameObject, 0.175f);
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+        Destroy(gameObject, 0.350f);
     }
     #endregion
 
