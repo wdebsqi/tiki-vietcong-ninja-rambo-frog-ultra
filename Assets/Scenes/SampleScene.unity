@@ -668,9 +668,6 @@ MonoBehaviour:
   MovementSpeed: 8
   BasicJumpPower: 20
   MaxJumpsCount: 1
-  hitOnX: 30
-  hitOnY: 0
-  health: 3
   BoxSize: {x: 0.75, y: 0.75}
 --- !u!95 &1565728825
 Animator:
