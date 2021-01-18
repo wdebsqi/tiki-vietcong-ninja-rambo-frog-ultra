@@ -1,22 +1,28 @@
 fileFormatVersion: 2
-guid: 9b7e8d8d6e9ac904dba7f59ba8b11835
+guid: 21e009b25ed6f954e805f9659cf583b7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3974224528455760076
-    second: Wall Jump (32x32)_0
+      213: 3643402406345325733
+    second: Death (32x32)_0
   - first:
-      213: 403085039841989221
-    second: Wall Jump (32x32)_1
+      213: 7695593406943086929
+    second: Death (32x32)_1
   - first:
-      213: -6018873884784744797
-    second: Wall Jump (32x32)_2
+      213: 325393069129905422
+    second: Death (32x32)_2
   - first:
-      213: -674972067355074983
-    second: Wall Jump (32x32)_3
+      213: 3889405922406774118
+    second: Death (32x32)_3
   - first:
-      213: 4366178942990776957
-    second: Wall Jump (32x32)_4
+      213: -7419404746033149773
+    second: Death (32x32)_4
+  - first:
+      213: 153681377602929733
+    second: Death (32x32)_5
+  - first:
+      213: -7482007199047998826
+    second: Death (32x32)_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -72,7 +78,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -114,7 +120,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wall Jump (32x32)_0
+      name: Death (32x32)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,14 +134,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7e94af15066c4444a210e4e9a5b3363
-      internalID: 3974224528455760076
+      spriteID: 5ac340c5f27ff8230800000000000000
+      internalID: 3643402406345325733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall Jump (32x32)_1
+      name: Death (32x32)_1
       rect:
         serializedVersion: 2
         x: 32
@@ -149,14 +155,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7876527fc4db8434ebe9e2440e3fd7f8
-      internalID: 403085039841989221
+      spriteID: 1594eac3e6d3cca60800000000000000
+      internalID: 7695593406943086929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall Jump (32x32)_2
+      name: Death (32x32)_2
       rect:
         serializedVersion: 2
         x: 64
@@ -170,14 +176,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f989c48feb92bf49a21f1d8311cec2e
-      internalID: -6018873884784744797
+      spriteID: e05bcd9b547048400800000000000000
+      internalID: 325393069129905422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall Jump (32x32)_3
+      name: Death (32x32)_3
       rect:
         serializedVersion: 2
         x: 96
@@ -191,14 +197,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52bbd4549414bd147b8f690181275409
-      internalID: -674972067355074983
+      spriteID: 6653b585412f9f530800000000000000
+      internalID: 3889405922406774118
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall Jump (32x32)_4
+      name: Death (32x32)_4
       rect:
         serializedVersion: 2
         x: 128
@@ -212,8 +218,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 118ea49af4c62954ca9813c9d5c6119f
-      internalID: 4366178942990776957
+      spriteID: 3b8c8d371baf80990800000000000000
+      internalID: -7419404746033149773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death (32x32)_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5448d90166cf12200800000000000000
+      internalID: 153681377602929733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death (32x32)_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69224d508129a2890800000000000000
+      internalID: -7482007199047998826
       vertices: []
       indices: 
       edges: []
@@ -230,7 +278,7 @@ TextureImporter:
     secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

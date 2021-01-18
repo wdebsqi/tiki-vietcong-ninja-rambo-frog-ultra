@@ -4,15 +4,47 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public bool movesRight;
-    int leftOrRight;
-    public int movementSpeed = 8;
-    public int health = 3;
+    #region References
     public Rigidbody2D rigidbodyEnemy;
-    public Animator animator;
     public GameObject enemy;
 
+    [Header("Animator")]
+    public Animator animator;
+
+    [Header("Particles")]
+    public GameObject deathParticles;
+
+    [Header("Layers")]
+    public LayerMask GroundLayer;
+
+    [Header("Physics")]
+    public Transform EnemyLegPosition;
+
     Transform leftWall, rightWall;
+    #endregion
+
+    #region Boolean variables
+    public bool movesRight;
+    bool isGrounded;
+    bool isFalling = true;
+    bool isDead = false;
+    #endregion
+
+    #region Movement settings
+    int leftOrRight;
+    [Header("Movement settings")]
+    public int movementSpeed = 8;
+    #endregion
+
+    #region Enemy settings
+    [Header("Enemy settings")]
+    public int health = 3;
+    #endregion
+
+    #region Physics
+    public Vector2 BoxSize;
+    #endregion
+
 
     private void Awake()
     {
@@ -26,36 +58,42 @@ public class EnemyController : MonoBehaviour
         leftWall = GameObject.Find("Left Wall").GetComponent<Transform>();
         rightWall = GameObject.Find("Right Wall").GetComponent<Transform>();
 
-        // randomly get 0 or 1
-        // 0 means that enemy will spawn moving left
-        // 1 means that enemy will spawn moving right
-        leftOrRight = Random.Range(0, 2);
-        if (leftOrRight == 0)
-        {
-            movesRight = false;
-            Debug.Log("Spawning LEFT moving enemy");
-        }
-        else
-        {
-            movesRight = true;
-            Debug.Log("Spawning RIGHT moving enemy");
-        }
+
+
     }
 
     void Update()
     {
+        if (isGrounded)
+        {
+            animator.SetBool("isRunning", true);
+        }
+
+        if (animator.GetBool("isDamaged"))
+        {
+            rigidbodyEnemy.velocity = new Vector2(movementSpeed * 0.2f, rigidbodyEnemy.velocity.y);
+        }
+
+        // Moving  -- going right 
         if (movesRight)
         {
+
             transform.localScale = new Vector2(1, 1);
+            //animator.SetBool("isRunning", true);
         }
+        // Moving  -- going left 
         else
         {
             transform.localScale = new Vector2(-1, 1);
+            //animator.SetBool("isRunning", true);
+
         }
 
-        // destroys enemies that fall into the pit
-        if (transform.position.y <= -7.4)
+        // Death -- destroys enemies that got into the pit
+
+        if ((transform.position.y <= -7.4) && (!isDead))
         {
+            isDead = true;
             Score.scoreValue -= 1;
             Die();
         }
@@ -64,6 +102,23 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        // Physics - Movement - Checking if box detected colider that is ground
+        isGrounded = Physics2D.BoxCast(EnemyLegPosition.position, BoxSize, 0f, Vector2.down, 0, GroundLayer);
+
+
+
+        // Physics - Movement - falling when enemy is not grounded
+        #region Falling mechanics
+        animator.SetBool("isFalling", !isGrounded);
+
+        EnemyFalling();
+
+        isFalling = !isGrounded;
+        #endregion
+
+        // if statement - Movement - hitting walls and flipping enemy
+        #region Hitting walls mechanics
         if (movesRight)
         {
             // check if not hitting right wall
@@ -71,12 +126,12 @@ public class EnemyController : MonoBehaviour
             {
                 // if true, go left
                 Debug.Log("Hitting RIGHT, going LEFT!");
-                moveLeft();
+                MoveLeft();
             }
             // if not, continue going right
             else
             {
-                moveRight();
+                MoveRight();
             }
         }
         else
@@ -86,47 +141,135 @@ public class EnemyController : MonoBehaviour
             {
                 // if true, go right
                 Debug.Log("Hitting LEFT, going RIGHT!");
-                moveRight();
+                MoveRight();
             }
             // if not, continue going left
             else
             {
-                moveLeft();
+                MoveLeft();
             }
         }
+        #endregion
     }
 
-
-    void moveRight()
+    // Function - Movement - gets enemy movement direction
+    void EnemyMovementDirection()
     {
-        movesRight = true;
-        rigidbodyEnemy.velocity = new Vector2(movementSpeed, rigidbodyEnemy.velocity.y);
+            // randomly get 0 or 1
+            // 0 means that enemy will spawn moving left
+            // 1 means that enemy will spawn moving right
+            leftOrRight = Random.Range(0, 2);
+            if (leftOrRight == 0)
+            {
+                movesRight = false;
+                Debug.Log("Spawning LEFT moving enemy");
+            }
+            else
+            {
+                movesRight = true;
+                Debug.Log("Spawning RIGHT moving enemy");
+            }
     }
 
-
-    void moveLeft()
+    // Function - Movement - makes enemy move right 
+    #region MoveRight()
+    void MoveRight()
     {
-        movesRight = false;
-        rigidbodyEnemy.velocity = new Vector2(-movementSpeed, rigidbodyEnemy.velocity.y);
-    }
+        if (isGrounded)
+        {
+            movesRight = true;
+            rigidbodyEnemy.velocity = new Vector2(movementSpeed, rigidbodyEnemy.velocity.y);
+        }
+        else
+        {
+            rigidbodyEnemy.velocity = new Vector2(0, rigidbodyEnemy.velocity.y);
+        }
 
-    
-    // damages an enemy and checks whether to kill them
+    }
+    #endregion
+
+
+    // Function - Movement - makes enemy move left
+    #region MoveLeft()
+    void MoveLeft()
+    {
+        if (isGrounded)
+        {
+            movesRight = false;
+            rigidbodyEnemy.velocity = new Vector2(-movementSpeed, rigidbodyEnemy.velocity.y);
+        }
+
+        else
+        {
+            rigidbodyEnemy.velocity = new Vector2(0, rigidbodyEnemy.velocity.y);
+        }
+    }
+    #endregion
+
+
+    // Function - Health - makes enemy take damage
+    #region TakeDamage(int damage)
     public void TakeDamage (int damage)
     {
         Debug.Log("Took damage");
+        animator.SetBool("isDamaged", true);
+        StartCoroutine(waitForAnimation());
         health -= damage;
         if (health <= 0)
         {
             Score.scoreValue += 1;
+            isDead = true;
             Die();
         }
     }
+    #endregion
 
-    // kills an enemy
-    void Die()
+    // Function - Health -  stopping enemy movement and destroying object
+    #region Die()
+    public void Die()
     {
-        Debug.Log("Enemy died");
-        Destroy(gameObject);
+        movementSpeed = 0;
+        rigidbodyEnemy.velocity = new Vector2(0, rigidbodyEnemy.velocity.y);
+        animator.SetTrigger("Dead");
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+        Destroy(gameObject, 0.350f);
     }
+    #endregion
+
+    // Function - Movement - enemy falling mechanics
+    #region EnemyFalling()
+    void EnemyFalling()
+    {
+        if (isGrounded)
+        {
+            if (isFalling)
+            {
+                rigidbodyEnemy.velocity = new Vector2(0, rigidbodyEnemy.velocity.y);
+                EnemyMovementDirection();
+                isFalling = true;
+
+            }
+            isFalling = false;
+        }
+        
+    }
+    #endregion
+
+    // IEnumerator function - Animation - is waiting for end of death animation
+    IEnumerator waitForAnimation()
+    {
+        yield return new WaitForSeconds(0.175f);
+        animator.SetBool("isDamaged", false);
+
+    }
+
+
+    // Gizmos - Help - drawing helpful things :)
+    #region OnDrawGizmos()
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.gray;
+        Gizmos.DrawCube(EnemyLegPosition.position, BoxSize);
+    }
+    #endregion
 }
