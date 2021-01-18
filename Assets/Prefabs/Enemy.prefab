@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8680937309315837929}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: EnemyLegsPosition
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8112696569555277490}
   - component: {fileID: 8112696569555277493}
   - component: {fileID: 8965995007631461346}
-  - component: {fileID: 729611570510820741}
+  - component: {fileID: 8112696569555277491}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -164,6 +164,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &8965995007631461346
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112696569555277494}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a6793fa864a9e34aa10628d45645dcc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8112696569555277491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,43 +205,7 @@ MonoBehaviour:
     m_Bits: 256
   EnemyLegPosition: {fileID: 8680937309315837929}
   movesRight: 0
-  movementSpeed: 8
-  health: 3
-  BoxSize: {x: 0.9, y: 0.5}
---- !u!95 &8965995007631461346
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8112696569555277494}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5a6793fa864a9e34aa10628d45645dcc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &729611570510820741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8112696569555277494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62e6de76ac2858c49b10b652cae8ef76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movesRight: 0
+  isDead: 0
   movementSpeed: 3
   health: 3
-  rigidbodyEnemy: {fileID: 8112696569555277493}
-  animator: {fileID: 8965995007631461346}
-  enemy: {fileID: 8112696569555277494}
+  BoxSize: {x: 0.9, y: 0.5}

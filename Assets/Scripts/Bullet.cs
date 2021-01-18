@@ -22,7 +22,10 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             Debug.Log("Enemy hit!");
-            enemy.TakeDamage(damage);
+            if(enemy.isDead == false)
+            {
+                enemy.TakeDamage(damage);
+            }
         }
         // destroy bullet
         Destroy(gameObject);

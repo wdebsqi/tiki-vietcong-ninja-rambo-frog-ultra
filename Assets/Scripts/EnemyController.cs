@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     public bool movesRight;
     bool isGrounded;
     bool isFalling = true;
-    bool isDead = false;
+    public bool isDead = false;
     #endregion
 
     #region Movement settings
@@ -69,25 +69,7 @@ public class EnemyController : MonoBehaviour
             animator.SetBool("isRunning", true);
         }
 
-        if (animator.GetBool("isDamaged"))
-        {
-            rigidbodyEnemy.velocity = new Vector2(movementSpeed * 0.2f, rigidbodyEnemy.velocity.y);
-        }
-
-        // Moving  -- going right 
-        if (movesRight)
-        {
-
-            transform.localScale = new Vector2(1, 1);
-            //animator.SetBool("isRunning", true);
-        }
-        // Moving  -- going left 
-        else
-        {
-            transform.localScale = new Vector2(-1, 1);
-            //animator.SetBool("isRunning", true);
-
-        }
+        Flip();
 
         // Death -- destroys enemies that got into the pit
 
@@ -117,7 +99,7 @@ public class EnemyController : MonoBehaviour
         isFalling = !isGrounded;
         #endregion
 
-        // if statement - Movement - hitting walls and flipping enemy
+        // if statement - Movement - hitting walls
         #region Hitting walls mechanics
         if (movesRight)
         {
@@ -217,10 +199,14 @@ public class EnemyController : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            Score.scoreValue += 1;
             isDead = true;
+            Score.scoreValue += 1;
             Die();
         }
+        //if (isDead)
+        //{
+        //    Score.scoreValue += 1;
+        //}
     }
     #endregion
 
@@ -254,6 +240,24 @@ public class EnemyController : MonoBehaviour
         
     }
     #endregion
+
+    void Flip()
+    {
+        // Moving  -- going right 
+        if (movesRight)
+        {
+
+            transform.localScale = new Vector2(1, 1);
+            //animator.SetBool("isRunning", true);
+        }
+        // Moving  -- going left 
+        else
+        {
+            transform.localScale = new Vector2(-1, 1);
+            //animator.SetBool("isRunning", true);
+
+        }
+    }
 
     // IEnumerator function - Animation - is waiting for end of death animation
     IEnumerator waitForAnimation()
