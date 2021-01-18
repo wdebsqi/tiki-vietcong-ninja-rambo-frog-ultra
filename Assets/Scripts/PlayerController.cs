@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     public float BasicJumpPower = 25f;
     public int MaxJumpsCount = 1;
     private int CurrentJumpsCount = 0;
+    public int hitOnX = 0;
+    public int hitOnY = 0;
+    public int health = 3;
     #endregion
 
     #region Physics
@@ -60,6 +63,11 @@ public class PlayerController : MonoBehaviour
         if (((Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.W))))
         {
             Jump();
+        }
+
+        if (transform.position.y <= -7.4)
+        {
+            Die();
         }
 
     }
@@ -124,6 +132,22 @@ public class PlayerController : MonoBehaviour
             // check that now is not moving right
             movesRight = false;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        // adding velocity on x doesn't work, don't know why
+        rigidbody2.velocity = new Vector2(100, 15);
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
