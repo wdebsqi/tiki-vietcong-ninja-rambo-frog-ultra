@@ -664,9 +664,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   PlayerLegPosition: {fileID: 1907900926}
-  animator: {fileID: 0}
+  animator: {fileID: 1565728825}
   MovementSpeed: 8
-  BasicJumpPower: 20
+  BasicJumpPower: 25
   MaxJumpsCount: 1
   BoxSize: {x: 0.75, y: 0.75}
 --- !u!95 &1565728825
