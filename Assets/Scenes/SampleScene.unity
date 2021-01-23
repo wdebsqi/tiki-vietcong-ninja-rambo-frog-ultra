@@ -509,7 +509,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1357432282
 GameObject:
@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 1565728824}
   - component: {fileID: 1565728825}
   - component: {fileID: 1565728826}
+  - component: {fileID: 1565728827}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -661,14 +662,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565728819}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.21, y: -4.02, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.21, y: -4.0199995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1907900926}
   - {fileID: 2054764288}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1565728822
 Rigidbody2D:
@@ -735,6 +736,9 @@ MonoBehaviour:
     m_Bits: 256
   PlayerLegPosition: {fileID: 1907900926}
   animator: {fileID: 1565728825}
+  playerHM: {fileID: 1565728827}
+  deathParticles: {fileID: 5372102607477634785, guid: 9e1ca0d3c79e83547bc5420a2173aeea,
+    type: 3}
   MovementSpeed: 8
   BasicJumpPower: 25
   MaxJumpsCount: 1
@@ -773,6 +777,35 @@ MonoBehaviour:
   firePoint: {fileID: 2054764288}
   bulletPrefab: {fileID: 8629758797306000562, guid: 2b6f232e91b71e14da41de684090133b,
     type: 3}
+--- !u!114 &1565728827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565728819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1bd76d93218a24292ecf5597f8e97e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1565728825}
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1565728824}
+        m_MethodName: BeforeDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  health: 3
+  isDead: 0
 --- !u!1 &1810489913
 GameObject:
   m_ObjectHideFlags: 0

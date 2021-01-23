@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundLayer;
     public Transform PlayerLegPosition;
     public Animator animator;
+    public PlayerHealthManager playerHM;
+    public GameObject deathParticles;
     #endregion
 
     #region Boolean variables
@@ -135,6 +137,16 @@ public class PlayerController : MonoBehaviour
             // check that now is not moving right
             movesRight = false;
         }
+    }
+    #endregion
+
+    // Function(Unity Event) - Animations & movement - stopping enemy and playing death animation
+    #region BeforeDeath() -- for event
+    public void BeforeDeath()
+    {
+        MovementSpeed = 0;
+        rigidbody2.velocity = new Vector2(0, rigidbody2.velocity.y);
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
     }
     #endregion
 
