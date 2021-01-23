@@ -21,6 +21,7 @@ public class PlayerHealthManager : MonoBehaviour
 
     #region Boolean variables
     public bool isDead = false;
+    public bool isHit = false;
     #endregion
 
     // Function - Health - makes player take damage
@@ -36,6 +37,7 @@ public class PlayerHealthManager : MonoBehaviour
             isDead = true;
             Die();
         }
+        StartCoroutine(takingDamageCooldown(1));
     }
     #endregion
 
@@ -69,4 +71,11 @@ public class PlayerHealthManager : MonoBehaviour
         animator.SetBool("isDamaged", false);
     }
     #endregion
+
+
+    IEnumerator takingDamageCooldown(int time)
+    {
+        yield return new WaitForSeconds(time);
+        isHit = false;
+    }
 }

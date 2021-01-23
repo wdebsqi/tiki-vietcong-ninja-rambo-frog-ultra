@@ -217,10 +217,13 @@ public class EnemyController : MonoBehaviour
     #region OnTriggerEnter()
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        PlayerHealthManager playerHM = collision.GetComponent<PlayerHealthManager>();
+        if (collision.tag == "Player" && playerHM.isHit == false)
         {
-            PlayerHealthManager player = collision.GetComponent<PlayerHealthManager>();
-            player.TakeDamage(1);
+            PlayerController player = collision.GetComponent<PlayerController>();
+            player.enemyHittingRb = rigidbodyEnemy;
+            playerHM.isHit = true;
+            playerHM.TakeDamage(1);
         }
     }
     #endregion

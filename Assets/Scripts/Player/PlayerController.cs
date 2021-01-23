@@ -11,11 +11,14 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public PlayerHealthManager playerHM;
     public GameObject deathParticles;
+    public Rigidbody2D enemyHittingRb;
     #endregion
 
     #region Boolean variables
     bool movesRight = true;
     bool isGrounded;
+    public bool isKnockedBack = false;
+    public bool canMove = true;
     #endregion
 
     #region Movement settings
@@ -25,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public float BasicJumpPower = 25f;
     public int MaxJumpsCount = 1;
     private int CurrentJumpsCount = 0;
+    public int hitOnX = 100;
+    public int hitOnY = 20;
     #endregion
 
     #region Physics
@@ -46,8 +51,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    // Movement - getting input from user
-        HorizontalMovement = Input.GetAxisRaw("Horizontal");
+        // Movement - getting input from user
+        if (canMove)
+            HorizontalMovement = Input.GetAxisRaw("Horizontal");
+        else
+            HorizontalMovement = 0;
 
         #region Movement mechanics
         // Moving  ---- if statement
@@ -79,13 +87,20 @@ public class PlayerController : MonoBehaviour
     // Movement - Jumping - isGrounded value is false while jumping
         animator.SetBool("isJumping", !isGrounded);
 
-    // Movement - adding movementspeed
-        rigidbody2.velocity = new Vector2((MovementSpeed) * HorizontalMovement, rigidbody2.velocity.y);
+        // Movement - adding movementspeed
+        if (canMove)
+            rigidbody2.velocity = new Vector2((MovementSpeed) * HorizontalMovement, rigidbody2.velocity.y);
 
     // Movement - resetting available jumps amount
         if (isGrounded)
         {
             CurrentJumpsCount = 0;
+        }
+
+        if (playerHM.isHit && isKnockedBack == false)
+        {
+            isKnockedBack = true;
+            Knockback();
         }
     }
 
@@ -139,6 +154,81 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
+
+    // Function - Movement - knocks player according to where 
+    public void Knockback()
+    {
+        //Debug.Log("Velocity: " + rigidbody2.velocity.ToString());
+        //Debug.Log("Enemy velocity: " + enemyHittingRb.velocity.ToString());
+        canMove = false;
+
+        Knock(0, hitOnY);
+        /*
+        // player is FALLING on enemy
+        if (rigidbody2.velocity.y < 0)
+        {
+            Knock(rigidbody2.velocity.x, 2 * hitOnY);
+        }
+        // player is JUMPING and enemy is FALLING
+        else if (rigidbody2.velocity.y > 0 && enemyHittingRb.velocity.y < 0)
+        {
+            Knock(0, 2 * enemyHittingRb.velocity.y);
+        }
+        // enemy is FALLING on player
+        else if (enemyHittingRb.velocity.y < 0)
+        {
+            Knock(-rigidbody2.velocity.x, -rigidbody2.velocity.y);
+        }
+        // enemy is moving RIGHT and player is moving LEFT
+        else if (enemyHittingRb.velocity.x > 0 && rigidbody2.velocity.x < 0)
+        {
+            Knock(2 * hitOnX, hitOnY);
+        }
+        // enemy is moving RIGHT and player is moving RIGHT
+        else if (enemyHittingRb.velocity.x > 0 && rigidbody2.velocity.x > 0)
+        {
+            Knock(-hitOnX, hitOnY);
+        }
+        // enemy is moving LEFT and player is moving RIGHT
+        else if (enemyHittingRb.velocity.x < 0 && rigidbody2.velocity.x > 0)
+        {
+            Knock(2 * -hitOnX, hitOnY);
+        }
+        // enemy is moving LEFT and player is moving LEFT
+        else if (enemyHittingRb.velocity.x > 0 && rigidbody2.velocity.x < 0)
+        {
+            Knock(hitOnX, hitOnY);
+        }
+        // enemy is moving LEFT and hits the NON-MOVING player
+        else if (enemyHittingRb.velocity.x < 0 && rigidbody2.velocity.x == 0)
+        {
+            Knock(2 * -hitOnX, hitOnY);
+        }
+        // enemy is moving RIGHT and hits the NON-MOVING player
+        else if (enemyHittingRb.velocity.x > 0 && rigidbody2.velocity.x == 0)
+        {
+            Knock(2 * hitOnX, hitOnY);
+        }*/
+        StartCoroutine(StopUserInput(0.25f));
+        StartCoroutine(KnockbackCooldown(1));
+
+        void Knock(float _hitOnX, float _hitOnY)
+        {
+            rigidbody2.AddForce(new Vector2(_hitOnX, _hitOnY), ForceMode2D.Impulse);
+        }
+    }
+
+    IEnumerator KnockbackCooldown(int time)
+    {
+        yield return new WaitForSeconds(time);
+        isKnockedBack = false;
+    }
+
+    IEnumerator StopUserInput(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canMove = true;
+    }
 
     // Function(Unity Event) - Animations & movement - stopping enemy and playing death animation
     #region BeforeDeath() -- for event

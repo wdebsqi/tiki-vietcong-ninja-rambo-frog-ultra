@@ -739,9 +739,14 @@ MonoBehaviour:
   playerHM: {fileID: 1565728827}
   deathParticles: {fileID: 5372102607477634785, guid: 9e1ca0d3c79e83547bc5420a2173aeea,
     type: 3}
+  enemyHittingRb: {fileID: 0}
+  isKnockedBack: 0
+  canMove: 1
   MovementSpeed: 8
   BasicJumpPower: 25
   MaxJumpsCount: 1
+  hitOnX: 25
+  hitOnY: 15
   BoxSize: {x: 0.75, y: 0.75}
 --- !u!95 &1565728825
 Animator:
@@ -804,8 +809,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  health: 3
+  health: 100
   isDead: 0
+  isHit: 0
 --- !u!1 &1810489913
 GameObject:
   m_ObjectHideFlags: 0
