@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     #region References
     public Rigidbody2D rigidbodyEnemy;
+    public BoxCollider2D triggerEnemy;
     public GameObject enemy;
     public EnemyHealthManager enemyHM;
 
@@ -63,10 +64,6 @@ public class EnemyController : MonoBehaviour
         }
 
         Flip();
-
-        // Death -- destroys enemies that got into the pit
-
-
     }
 
     // Update is called once per frame
@@ -95,7 +92,7 @@ public class EnemyController : MonoBehaviour
             if (transform.position.x >= rightWall.position.x)
             {
                 // if true, go left
-                Debug.Log("Hitting RIGHT, going LEFT!");
+                //Debug.Log("Hitting RIGHT, going LEFT!");
                 MoveLeft();
             }
             // if not, continue going right
@@ -110,7 +107,7 @@ public class EnemyController : MonoBehaviour
             if (transform.position.x <= leftWall.position.x)
             {
                 // if true, go right
-                Debug.Log("Hitting LEFT, going RIGHT!");
+                //Debug.Log("Hitting LEFT, going RIGHT!");
                 MoveRight();
             }
             // if not, continue going left
@@ -133,12 +130,12 @@ public class EnemyController : MonoBehaviour
             if (leftOrRight == 0)
             {
                 movesRight = false;
-                Debug.Log("Spawning LEFT moving enemy");
+                //Debug.Log("Spawning LEFT moving enemy");
             }
             else
             {
                 movesRight = true;
-                Debug.Log("Spawning RIGHT moving enemy");
+                //Debug.Log("Spawning RIGHT moving enemy");
             }
     }
     #endregion
@@ -208,6 +205,21 @@ public class EnemyController : MonoBehaviour
         else
         {
             transform.localScale = new Vector2(-1, 1);
+        }
+    }
+    #endregion
+
+    // Function - OnTriggerEnter - hits player
+    #region OnTriggerEnter()
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerHealthManager playerHM = collision.GetComponent<PlayerHealthManager>();
+        if (collision.tag == "Player" && playerHM.isHit == false)
+        {
+            PlayerController player = collision.GetComponent<PlayerController>();
+            player.enemyHittingRb = rigidbodyEnemy;
+            playerHM.isHit = true;
+            playerHM.TakeDamage(1);
         }
     }
     #endregion

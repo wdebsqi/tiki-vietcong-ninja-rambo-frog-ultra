@@ -9,11 +9,16 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundLayer;
     public Transform PlayerLegPosition;
     public Animator animator;
+    public PlayerHealthManager playerHM;
+    public GameObject deathParticles;
+    public Rigidbody2D enemyHittingRb;
     #endregion
 
     #region Boolean variables
     bool movesRight = true;
     bool isGrounded;
+    public bool isKnockedBack = false;
+    public bool canMove = true;
     #endregion
 
     #region Movement settings
@@ -23,6 +28,10 @@ public class PlayerController : MonoBehaviour
     public float BasicJumpPower = 25f;
     public int MaxJumpsCount = 1;
     private int CurrentJumpsCount = 0;
+    public int hitOnX = 100;
+    public int hitOnY = 20;
+    public float timeWhenPlayerCantMove = 0.25f;
+    public int timeForKnockbackCooldown = 1;
     #endregion
 
     #region Physics
@@ -44,8 +53,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    // Movement - getting input from user
-        HorizontalMovement = Input.GetAxisRaw("Horizontal");
+        // Movement - getting input from user
+        if (canMove)
+            HorizontalMovement = Input.GetAxisRaw("Horizontal");
+        else
+            HorizontalMovement = 0;
 
         #region Movement mechanics
         // Moving  ---- if statement
@@ -78,13 +90,20 @@ public class PlayerController : MonoBehaviour
     // Movement - Jumping - isGrounded value is false while jumping
         animator.SetBool("isJumping", !isGrounded);
 
-    // Movement - adding movementspeed
-        rigidbody2.velocity = new Vector2((MovementSpeed) * HorizontalMovement, rigidbody2.velocity.y);
+        // Movement - adding movementspeed
+        if (canMove)
+            rigidbody2.velocity = new Vector2((MovementSpeed) * HorizontalMovement, rigidbody2.velocity.y);
 
     // Movement - resetting available jumps amount
         if (isGrounded)
         {
             CurrentJumpsCount = 0;
+        }
+
+        if (playerHM.isHit && isKnockedBack == false)
+        {
+            isKnockedBack = true;
+            Knockback();
         }
     }
 
@@ -138,6 +157,52 @@ public class PlayerController : MonoBehaviour
             // check that now is not moving right
             movesRight = false;
         }
+    }
+    #endregion
+
+    #region Knockback()
+    // Function - Movement - knocks player according to where 
+    public void Knockback()
+    {
+        canMove = false;
+
+        Knock(0, hitOnY);
+        StartCoroutine(StopUserInput(timeWhenPlayerCantMove));
+        StartCoroutine(KnockbackCooldown(timeForKnockbackCooldown));
+
+        void Knock(float _hitOnX, float _hitOnY)
+        {
+            rigidbody2.AddForce(new Vector2(_hitOnX, _hitOnY), ForceMode2D.Impulse);
+        }
+    }
+    #endregion
+
+    // IEnumerator function - Movement - knockback cooldown
+    #region KnockbackCooldown()
+    IEnumerator KnockbackCooldown(int time)
+    {
+        yield return new WaitForSeconds(time);
+        isKnockedBack = false;
+    }
+    #endregion
+
+
+    // IEnumerator - Movement - stops user input
+    #region StopUserInput()
+    IEnumerator StopUserInput(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canMove = true;
+    }
+    #endregion
+
+    // Function(Unity Event) - Animations & movement - stopping enemy and playing death animation
+    #region BeforeDeath() -- for event
+    public void BeforeDeath()
+    {
+        MovementSpeed = 0;
+        rigidbody2.velocity = new Vector2(0, rigidbody2.velocity.y);
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
     }
     #endregion
 

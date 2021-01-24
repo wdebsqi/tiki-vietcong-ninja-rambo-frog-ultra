@@ -12,6 +12,13 @@ public class DeathPit : MonoBehaviour
         if(enemy != null)
         {
             enemy.PitDie();
+            return;
+        }
+
+        PlayerHealthManager player = other.GetComponent<PlayerHealthManager>();
+        if(player != null)
+        {
+            player.PitDie();
         }
 
     }
