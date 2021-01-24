@@ -17,6 +17,7 @@ public class PlayerHealthManager : MonoBehaviour
     #region Player settings
     [Header("Player settings")]
     public int health = 3;
+    public int timeForDamageCooldown = 1;
     #endregion
 
     #region Boolean variables
@@ -37,7 +38,7 @@ public class PlayerHealthManager : MonoBehaviour
             isDead = true;
             Die();
         }
-        StartCoroutine(takingDamageCooldown(1));
+        StartCoroutine(takingDamageCooldown(timeForDamageCooldown));
     }
     #endregion
 
@@ -73,9 +74,12 @@ public class PlayerHealthManager : MonoBehaviour
     #endregion
 
 
+    // IEnumerator function - Health - makes you immortal for some time
+    #region takingDamageCooldown()
     IEnumerator takingDamageCooldown(int time)
     {
         yield return new WaitForSeconds(time);
         isHit = false;
     }
+    #endregion
 }

@@ -64,10 +64,6 @@ public class EnemyController : MonoBehaviour
         }
 
         Flip();
-
-        // Death -- destroys enemies that got into the pit
-
-
     }
 
     // Update is called once per frame

@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private int CurrentJumpsCount = 0;
     public int hitOnX = 100;
     public int hitOnY = 20;
+    public float timeWhenPlayerCantMove = 0.25f;
+    public int timeForKnockbackCooldown = 1;
     #endregion
 
     #region Physics
@@ -155,80 +157,41 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Knockback()
     // Function - Movement - knocks player according to where 
     public void Knockback()
     {
-        //Debug.Log("Velocity: " + rigidbody2.velocity.ToString());
-        //Debug.Log("Enemy velocity: " + enemyHittingRb.velocity.ToString());
         canMove = false;
 
         Knock(0, hitOnY);
-        /*
-        // player is FALLING on enemy
-        if (rigidbody2.velocity.y < 0)
-        {
-            Knock(rigidbody2.velocity.x, 2 * hitOnY);
-        }
-        // player is JUMPING and enemy is FALLING
-        else if (rigidbody2.velocity.y > 0 && enemyHittingRb.velocity.y < 0)
-        {
-            Knock(0, 2 * enemyHittingRb.velocity.y);
-        }
-        // enemy is FALLING on player
-        else if (enemyHittingRb.velocity.y < 0)
-        {
-            Knock(-rigidbody2.velocity.x, -rigidbody2.velocity.y);
-        }
-        // enemy is moving RIGHT and player is moving LEFT
-        else if (enemyHittingRb.velocity.x > 0 && rigidbody2.velocity.x < 0)
-        {
-            Knock(2 * hitOnX, hitOnY);
-        }
-        // enemy is moving RIGHT and player is moving RIGHT
-        else if (enemyHittingRb.velocity.x > 0 && rigidbody2.velocity.x > 0)
-        {
-            Knock(-hitOnX, hitOnY);
-        }
-        // enemy is moving LEFT and player is moving RIGHT
-        else if (enemyHittingRb.velocity.x < 0 && rigidbody2.velocity.x > 0)
-        {
-            Knock(2 * -hitOnX, hitOnY);
-        }
-        // enemy is moving LEFT and player is moving LEFT
-        else if (enemyHittingRb.velocity.x > 0 && rigidbody2.velocity.x < 0)
-        {
-            Knock(hitOnX, hitOnY);
-        }
-        // enemy is moving LEFT and hits the NON-MOVING player
-        else if (enemyHittingRb.velocity.x < 0 && rigidbody2.velocity.x == 0)
-        {
-            Knock(2 * -hitOnX, hitOnY);
-        }
-        // enemy is moving RIGHT and hits the NON-MOVING player
-        else if (enemyHittingRb.velocity.x > 0 && rigidbody2.velocity.x == 0)
-        {
-            Knock(2 * hitOnX, hitOnY);
-        }*/
-        StartCoroutine(StopUserInput(0.25f));
-        StartCoroutine(KnockbackCooldown(1));
+        StartCoroutine(StopUserInput(timeWhenPlayerCantMove));
+        StartCoroutine(KnockbackCooldown(timeForKnockbackCooldown));
 
         void Knock(float _hitOnX, float _hitOnY)
         {
             rigidbody2.AddForce(new Vector2(_hitOnX, _hitOnY), ForceMode2D.Impulse);
         }
     }
+    #endregion
 
+    // IEnumerator function - Movement - knockback cooldown
+    #region KnockbackCooldown()
     IEnumerator KnockbackCooldown(int time)
     {
         yield return new WaitForSeconds(time);
         isKnockedBack = false;
     }
+    #endregion
 
+
+    // IEnumerator - Movement - stops user input
+    #region StopUserInput()
     IEnumerator StopUserInput(float time)
     {
         yield return new WaitForSeconds(time);
         canMove = true;
     }
+    #endregion
 
     // Function(Unity Event) - Animations & movement - stopping enemy and playing death animation
     #region BeforeDeath() -- for event

@@ -747,6 +747,8 @@ MonoBehaviour:
   MaxJumpsCount: 1
   hitOnX: 25
   hitOnY: 15
+  timeWhenPlayerCantMove: 0.25
+  timeForKnockbackCooldown: 1
   BoxSize: {x: 0.75, y: 0.75}
 --- !u!95 &1565728825
 Animator:
@@ -810,6 +812,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   health: 100
+  timeForDamageCooldown: 1
   isDead: 0
   isHit: 0
 --- !u!1 &1810489913
