@@ -58,6 +58,7 @@ public class PlayerHealthManager : MonoBehaviour
     public void PitDie()
     {
         Debug.Log("Player died in the pit");
+        health = 0;
         onDamageTaken.Invoke();
         isDead = true;
         Destroy(gameObject);

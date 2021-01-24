@@ -18,19 +18,8 @@ public class LivesCounter : MonoBehaviour
     void Update()
     {
         // if/else statements - Game - score counting mechanism
-        #region Score mechanics
-        if (playerHM.health > 99)
-        {
-            lives.text = ">99";
-        }
-        else if (playerHM.health < -99)
-        {
-            lives.text = "-99";
-        }
-        else
-        {
-            lives.text = "" + playerHM.health;
-        }
+        #region Lives mechanics
+        lives.text = "" + playerHM.health;
         #endregion
     }
 }
