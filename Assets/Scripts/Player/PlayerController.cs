@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         if (((Input.GetKeyDown(KeyCode.UpArrow)) || (Input.GetKeyDown(KeyCode.W))))
         {
             Jump();
+            //animator.SetBool("isJumping", true);
         }
         #endregion
 
@@ -86,6 +87,8 @@ public class PlayerController : MonoBehaviour
             CurrentJumpsCount = 0;
         }
     }
+
+
 
     // Function - Movement - makes player jump
     #region Jump()
