@@ -266,7 +266,7 @@ MonoBehaviour:
     m_Bits: 256
   EnemyLegPosition: {fileID: 8680937309315837929}
   movesRight: 0
-  movementSpeed: 3
+  movementSpeed: 8
   BoxSize: {x: 0.9, y: 0.5}
 --- !u!114 &4306715869961750268
 MonoBehaviour:
