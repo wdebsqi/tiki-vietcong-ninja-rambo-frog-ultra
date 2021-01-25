@@ -50,6 +50,7 @@ public class PlayerHealthManager : MonoBehaviour
         onDamageTaken.Invoke();
         animator.SetTrigger("Dead");
         Destroy(gameObject, 0.350f);
+        FindObjectOfType<GameManagerController>().EndGame(1);
     }
     #endregion
 
@@ -62,6 +63,7 @@ public class PlayerHealthManager : MonoBehaviour
         onDamageTaken.Invoke();
         isDead = true;
         Destroy(gameObject);
+        FindObjectOfType<GameManagerController>().EndGame(1);
     }
     #endregion
 
@@ -73,7 +75,6 @@ public class PlayerHealthManager : MonoBehaviour
         animator.SetBool("isDamaged", false);
     }
     #endregion
-
 
     // IEnumerator function - Health - makes you immortal for some time
     #region takingDamageCooldown()
