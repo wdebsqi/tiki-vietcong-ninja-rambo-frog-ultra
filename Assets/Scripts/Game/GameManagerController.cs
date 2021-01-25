@@ -7,6 +7,8 @@ public class GameManagerController : MonoBehaviour
 {
     bool gameIsOver = false;
 
+    #region EndGame()
+    // takes player to Gameover Screen
     public void EndGame(int time)
     {
         if (gameIsOver == false)
@@ -14,21 +16,31 @@ public class GameManagerController : MonoBehaviour
             StartCoroutine(WaitForGameOverScreen(time));
         }
     }
+    #endregion
 
-    void Restart()
+    #region Restart()
+    // restarts the game
+    public void Restart()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
+    #endregion
 
-    void Quit()
+    #region Quit()
+    // quits the game
+    public void Quit()
     {
-
+        Application.Quit();
     }
+    #endregion
 
+    #region WaitForGameOverScreen()
+    // waits some time and then loads Gameover Screen
     IEnumerator WaitForGameOverScreen(int time)
     {
         yield return new WaitForSeconds(time);
         gameIsOver = true;
-        SceneManager.LoadScene("GameOverScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    #endregion
 }
