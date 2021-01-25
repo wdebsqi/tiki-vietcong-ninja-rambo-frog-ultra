@@ -7,6 +7,14 @@ public class GameManagerController : MonoBehaviour
 {
     bool gameIsOver = false;
 
+    #region Play()
+    // starts the game
+    public void Play()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    #endregion
+
     #region EndGame()
     // takes player to Gameover Screen
     public void EndGame(int time)
@@ -22,6 +30,7 @@ public class GameManagerController : MonoBehaviour
     // restarts the game
     public void Restart()
     {
+        Score.scoreValue = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
     #endregion
