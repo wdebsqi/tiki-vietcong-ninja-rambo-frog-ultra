@@ -8,6 +8,7 @@ public class PlayerHealthManager : MonoBehaviour
     #region References
     [Header("Animator")]
     public Animator animator;
+    public LivesPanelController livesPC;
     #endregion
 
     #region Events
@@ -33,6 +34,7 @@ public class PlayerHealthManager : MonoBehaviour
         animator.SetBool("isDamaged", true);
         StartCoroutine(waitForDamageAnimation(0.175f));
         health -= damage;
+        livesPC.UpdateHearts(health);
         if (health <= 0)
         {
             isDead = true;
@@ -60,6 +62,7 @@ public class PlayerHealthManager : MonoBehaviour
     {
         Debug.Log("Player died in the pit");
         health = 0;
+        livesPC.UpdateHearts(health);
         onDamageTaken.Invoke();
         isDead = true;
         Destroy(gameObject);
