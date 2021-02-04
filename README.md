@@ -23,18 +23,18 @@ Oh and by the way, Tiki Vietcong forces are very dangerous. Don't let them touch
 * Unity 2019.4.16f1
 
 # **Example footage**
-Player movement:
-![frog jumping](https://media.giphy.com/media/JbafdrRYPR0g50NjX5/giphy.gif)
-Player shooting:  
-![frog shooting](https://media.giphy.com/media/ET7ZdvGdLvmRG7Etxr/giphy.gif)
+Player movement:  
+![frog jumping](https://media.giphy.com/media/JbafdrRYPR0g50NjX5/giphy.gif)  
+Player shooting:   
+![frog shooting](https://media.giphy.com/media/ET7ZdvGdLvmRG7Etxr/giphy.gif)  
 Player taking damage:  
-![frog taking damage](https://media.giphy.com/media/kxCpkfXF0xjr0LuMb2/giphy.gif)
+![frog taking damage](https://media.giphy.com/media/kxCpkfXF0xjr0LuMb2/giphy.gif)  
 Player taking damage UI:  
-![frog health](https://media.giphy.com/media/w2oJV5nsgXALn1xhas/giphy.gif)
+![frog health](https://media.giphy.com/media/w2oJV5nsgXALn1xhas/giphy.gif)  
 Enemy dying:  
-![enemy dying](https://media.giphy.com/media/IGoNntLkpKqD2SuOn9/giphy.gif)
+![enemy dying](https://media.giphy.com/media/IGoNntLkpKqD2SuOn9/giphy.gif)  
 Full screen gameplay:  
-![full screen gameplay](https://media.giphy.com/media/6i1R285rWDgptbdUzG/giphy.gif)       
+![full screen gameplay](https://media.giphy.com/media/6i1R285rWDgptbdUzG/giphy.gif)         
 
 # **Planned features**
 [:heavy_check_mark:] release v1.0  
