@@ -1,5 +1,92 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &573849460665426482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4439388073170232553}
+  - component: {fileID: 3453150146234285937}
+  m_Layer: 0
+  m_Name: EnemyTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4439388073170232553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573849460665426482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8112696569555277492}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3453150146234285937
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573849460665426482}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 6dc91a7e4080561499263bc8cb6709e0, type: 2}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.026224807, y: -0.16393077}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8822094, y: 1.5647981}
+  m_EdgeRadius: 0
+--- !u!1 &1889152629111067968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8680937309315837929}
+  m_Layer: 0
+  m_Name: EnemyLegsPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8680937309315837929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889152629111067968}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.026, y: -0.787, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8112696569555277492}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8112696569555277494
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,8 +99,9 @@ GameObject:
   - component: {fileID: 8112696569555277495}
   - component: {fileID: 8112696569555277490}
   - component: {fileID: 8112696569555277493}
-  - component: {fileID: 8112696569555277491}
   - component: {fileID: 8965995007631461346}
+  - component: {fileID: 8112696569555277491}
+  - component: {fileID: 4306715869961750268}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -29,9 +117,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8112696569555277494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 4.69, z: -1.5477396}
+  m_LocalPosition: {x: 0.071, y: 4.679, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8680937309315837929}
+  - {fileID: 4439388073170232553}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,11 +185,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 8112696569555277494}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6dc91a7e4080561499263bc8cb6709e0, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12332785, y: -0.1282816}
+  m_Offset: {x: 0.026224807, y: -0.16393077}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +200,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4842107, y: 1.7457867}
+  m_Size: {x: 0.8822094, y: 1.5647981}
   m_EdgeRadius: 0
 --- !u!50 &8112696569555277493
 Rigidbody2D:
@@ -128,31 +218,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6dc91a7e4080561499263bc8cb6709e0, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &8112696569555277491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8112696569555277494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62e6de76ac2858c49b10b652cae8ef76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movesRight: 0
-  movementSpeed: 2
-  healt: 3
-  rigidbodyEnemy: {fileID: 8112696569555277493}
-  animator: {fileID: 0}
-  enemy: {fileID: 8112696569555277494}
-  deathEffect: {fileID: 3219065541448567700, guid: 89282e21227354c48aca8df6c2b3955a,
-    type: 3}
 --- !u!95 &8965995007631461346
 Animator:
   serializedVersion: 3
@@ -172,3 +242,58 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8112696569555277491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112696569555277494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e6de76ac2858c49b10b652cae8ef76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbodyEnemy: {fileID: 8112696569555277493}
+  triggerEnemy: {fileID: 3453150146234285937}
+  enemy: {fileID: 8112696569555277494}
+  enemyHM: {fileID: 4306715869961750268}
+  animator: {fileID: 0}
+  deathParticles: {fileID: 5372102607477634785, guid: 9e1ca0d3c79e83547bc5420a2173aeea,
+    type: 3}
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  EnemyLegPosition: {fileID: 8680937309315837929}
+  movesRight: 0
+  movementSpeed: 6
+  BoxSize: {x: 0.9, y: 0.5}
+--- !u!114 &4306715869961750268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112696569555277494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e72924db245184082d8a1ccca12856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8965995007631461346}
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8112696569555277491}
+        m_MethodName: BeforeDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  health: 3
+  isDead: 0
