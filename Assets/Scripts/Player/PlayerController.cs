@@ -63,8 +63,9 @@ public class PlayerController : MonoBehaviour
         // Moving  ---- if statement
         if (HorizontalMovement != 0)
         {
-            Flip();
             animator.SetBool("isRunning", true); // Setting true value of bool - isRunning
+            Flip();
+
         }
         else
         {
@@ -84,27 +85,39 @@ public class PlayerController : MonoBehaviour
     // Update is called fixed amount of times (depending on framerate)
     private void FixedUpdate()
     {
-    // Checking if box detected colider that is ground
-        isGrounded = Physics2D.BoxCast(PlayerLegPosition.position, BoxSize, 0f, Vector2.down, 0, GroundLayer);
+        // Checking if box detected colider that is ground
+            isGrounded = Physics2D.BoxCast(PlayerLegPosition.position, BoxSize, 0f, Vector2.down, 0, GroundLayer);
 
-    // Movement - Jumping - isGrounded value is false while jumping
-        animator.SetBool("isJumping", !isGrounded);
+        // Movement - Jumping - isGrounded value is false while jumping
+
+        //animator.SetBool("isJumping", !isGrounded);
+            if (rigidbody2.velocity.y < 0)
+            {
+                animator.SetBool("isFalling", !isGrounded);
+                animator.SetBool("isJumping", false);
+            }
+            if (rigidbody2.velocity.y >= 0)
+            {
+                animator.SetBool("isJumping", !isGrounded);
+                animator.SetBool("isFalling", false);
+            }
+
 
         // Movement - adding movementspeed
         if (canMove)
             rigidbody2.velocity = new Vector2((MovementSpeed) * HorizontalMovement, rigidbody2.velocity.y);
 
-    // Movement - resetting available jumps amount
-        if (isGrounded)
-        {
-            CurrentJumpsCount = 0;
-        }
+        // Movement - resetting available jumps amount
+            if (isGrounded)
+            {
+                CurrentJumpsCount = 0;
+            }
 
-        if (playerHM.isHit && isKnockedBack == false)
-        {
-            isKnockedBack = true;
-            Knockback();
-        }
+            if (playerHM.isHit && isKnockedBack == false)
+            {
+                isKnockedBack = true;
+                Knockback();
+            }
     }
 
 

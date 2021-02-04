@@ -5,46 +5,49 @@ using UnityEngine.UI;
 
 public class LivesPanelController : MonoBehaviour
 {
-    public Sprite heartFullSprite, heartEmptySprite;
-    public Image heart1, heart2, heart3;
+    //public Sprite heart_0, heart_6;
+    //public Image heart1_img, heart2_img, heart3_img;
+    public GameObject heart1, heart2, heart3;
+    public Animator heart1_animator, heart2_animator, heart3_animator;
 
     #region UpdateHearts()
     // updates hearts sprites
     public void UpdateHearts(int health)
     {
+
         // draw 3 full hearts
-        if (health == 3)
-        {
-            heart3.sprite = heartFullSprite;
-            heart2.sprite = heartFullSprite;
-            heart1.sprite = heartFullSprite;
-            return;
-        }
+        //if (health == 3)
+        //{
+        //    return;
+        //}
 
         if (health == 2)
         {
             // draw 2 full hearts
-            heart3.sprite = heartEmptySprite;
-            heart2.sprite = heartFullSprite;
-            heart1.sprite = heartFullSprite;
+            heart3_animator.SetTrigger("TakeDamage");
+            //heart2_img.sprite = heart_0;
+            //heart1_img.sprite = heart_0;
             return;
         }
 
         if (health == 1)
         {
             // draw 1 full heart
-            heart3.sprite = heartEmptySprite;
-            heart2.sprite = heartEmptySprite;
-            heart1.sprite = heartFullSprite;
+            //heart3_img.sprite = heart_6;
+            heart3_animator.SetTrigger("TakeDamage");
+            heart2_animator.SetTrigger("TakeDamage");
+            //heart1_img.sprite = heart_0;
             return;
         }
 
         if (health <= 0)
         {
             // draw 0 full hearts
-            heart3.sprite = heartEmptySprite;
-            heart2.sprite = heartEmptySprite;
-            heart1.sprite = heartEmptySprite;
+            //heart3_img.sprite = heart_6;
+            //heart2_img.sprite = heart_6;
+            heart3_animator.SetTrigger("TakeDamage");
+            heart2_animator.SetTrigger("TakeDamage");
+            heart1_animator.SetTrigger("TakeDamage");
             return;
         }
     }
