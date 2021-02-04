@@ -202,7 +202,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -333.2, y: 212.31}
+  m_AnchoredPosition: {x: -329.1, y: 212.31}
   m_SizeDelta: {x: -666.3977, y: -424.61978}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &89584652
@@ -217,11 +217,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c6f15e14a20aa40b309024cf6a3b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartFullSprite: {fileID: 21300000, guid: a747a96218f09f94aad83be8f9b0ebba, type: 3}
-  heartEmptySprite: {fileID: 21300000, guid: 1642ee9f7e0c0e84eb0c134e2d4bed40, type: 3}
-  heart1: {fileID: 1908809717}
-  heart2: {fileID: 618802612}
-  heart3: {fileID: 1479525191}
+  heart1: {fileID: 1908809715}
+  heart2: {fileID: 618802610}
+  heart3: {fileID: 1479525189}
+  heart1_animator: {fileID: 1908809719}
+  heart2_animator: {fileID: 618802614}
+  heart3_animator: {fileID: 1479525193}
 --- !u!222 &89584653
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -259,6 +260,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ExcludedPropertiesInInspector:
+  - m_Script
+  m_LockStageInInspector: 
+  m_StreamingVersion: 20170927
+  m_Priority: 10
+  m_StandbyUpdate: 2
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
+  m_Lens:
+    FieldOfView: 40
+    OrthographicSize: 8.41
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+    LensShift: {x: 0, y: 0}
+  m_Transitions:
+    m_BlendHint: 0
+    m_InheritPosition: 0
+    m_OnCameraLive:
+      m_PersistentCalls:
+        m_Calls: []
+  m_LegacyBlendHint: 0
+  m_ComponentOwner: {fileID: 483097544}
 --- !u!4 &339475612
 Transform:
   m_ObjectHideFlags: 0
@@ -343,7 +367,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &519420030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,7 +429,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 8.42
+  orthographic size: 8.41
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -543,6 +567,7 @@ GameObject:
   - component: {fileID: 618802611}
   - component: {fileID: 618802613}
   - component: {fileID: 618802612}
+  - component: {fileID: 618802614}
   m_Layer: 5
   m_Name: Heart2
   m_TagString: Untagged
@@ -559,14 +584,14 @@ RectTransform:
   m_GameObject: {fileID: 618802610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 89584651}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038146973, y: 0.000011683}
+  m_AnchoredPosition: {x: -4.9, y: 2.580017}
   m_SizeDelta: {x: 21.168503, y: 21.168503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618802612
@@ -588,7 +613,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a747a96218f09f94aad83be8f9b0ebba, type: 3}
+  m_Sprite: {fileID: -205270267638800340, guid: 1bbc8f8b8d89d6149b0e9efd45b77cd3,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -606,6 +632,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618802610}
   m_CullTransparentMesh: 0
+--- !u!95 &618802614
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618802610}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f03d396b7776d104184cc6e51b075db7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &763534081
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +972,7 @@ GameObject:
   - component: {fileID: 1479525190}
   - component: {fileID: 1479525192}
   - component: {fileID: 1479525191}
+  - component: {fileID: 1479525193}
   m_Layer: 5
   m_Name: Heart3
   m_TagString: Untagged
@@ -943,14 +989,14 @@ RectTransform:
   m_GameObject: {fileID: 1479525189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 89584651}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39.7, y: 0.000011683}
+  m_AnchoredPosition: {x: 29.9, y: 2.580017}
   m_SizeDelta: {x: 21.168503, y: 21.168503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479525191
@@ -972,7 +1018,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a747a96218f09f94aad83be8f9b0ebba, type: 3}
+  m_Sprite: {fileID: -205270267638800340, guid: 1bbc8f8b8d89d6149b0e9efd45b77cd3,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -990,6 +1037,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479525189}
   m_CullTransparentMesh: 0
+--- !u!95 &1479525193
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479525189}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f03d396b7776d104184cc6e51b075db7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1490904834
 GameObject:
   m_ObjectHideFlags: 0
@@ -5915,7 +5981,7 @@ MonoBehaviour:
   isKnockedBack: 0
   canMove: 1
   MovementSpeed: 8
-  BasicJumpPower: 25
+  BasicJumpPower: 21.5
   MaxJumpsCount: 1
   hitOnX: 25
   hitOnY: 15
@@ -8264,6 +8330,7 @@ GameObject:
   - component: {fileID: 1908809716}
   - component: {fileID: 1908809718}
   - component: {fileID: 1908809717}
+  - component: {fileID: 1908809719}
   m_Layer: 5
   m_Name: Heart1
   m_TagString: Untagged
@@ -8280,14 +8347,14 @@ RectTransform:
   m_GameObject: {fileID: 1908809715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 89584651}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38.9, y: 0.000011683}
+  m_AnchoredPosition: {x: -39.5, y: 2.580017}
   m_SizeDelta: {x: 21.168503, y: 21.168503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908809717
@@ -8309,7 +8376,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a747a96218f09f94aad83be8f9b0ebba, type: 3}
+  m_Sprite: {fileID: -205270267638800340, guid: 1bbc8f8b8d89d6149b0e9efd45b77cd3,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8327,6 +8395,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908809715}
   m_CullTransparentMesh: 0
+--- !u!95 &1908809719
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908809715}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f03d396b7776d104184cc6e51b075db7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1988376688
 GameObject:
   m_ObjectHideFlags: 0
@@ -8383,12 +8470,12 @@ SpriteRenderer:
   m_SortingLayerID: -755180529
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dab717e063fb4114c85cfd1ccf3446d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b29f8716fcccb7a428fe468532717ffd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 30.375986, y: 17.2}
+  m_Size: {x: 30.02977, y: 16.752571}
   m_AdaptiveModeThreshold: 0.52
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
@@ -8402,7 +8489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988376688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 0.069, z: -0.15445319}
+  m_LocalPosition: {x: 0.08, y: 0.038, z: -0.15445319}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8472,7 +8559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -41.557, y: -21.4}
+  m_AnchoredPosition: {x: -41.557007, y: -21.400024}
   m_SizeDelta: {x: 83.12253, y: 41.79145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2093223534
